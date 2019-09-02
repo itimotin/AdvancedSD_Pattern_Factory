@@ -2,6 +2,13 @@ package bank;
 
 import java.util.Collection;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Writer;
+import java.util.Collection;
+import java.util.Properties;
+
 import bank.domain.Account;
 import bank.domain.AccountEntry;
 import bank.domain.Customer;
@@ -12,6 +19,18 @@ import bank.service.IAccountService;
 
 public class Application {
 	public static void main(String[] args) {
+	
+		try (OutputStream output = new FileOutputStream("/Users/teamoteen/eclipse-workspace/AdvancedSD_Pattern_Factory/bank/src/main/resources/config.properties")) {
+            Properties prop = new Properties();
+            // set key and value
+            prop.setProperty("environment", "production");
+            //prop.setProperty("environment", "test");
+            // save properties to project root folder
+            prop.store(output, null);
+        } catch (IOException io) {
+        	System.out.println("Error ocurred: " + io.getLocalizedMessage());
+        }
+		
 		IAccountService accountService = new AccountService();
 		// create 2 accounts;
 		accountService.createAccount(1263862, "Frank Brown");

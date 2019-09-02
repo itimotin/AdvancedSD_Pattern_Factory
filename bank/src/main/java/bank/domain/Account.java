@@ -26,12 +26,22 @@ public class Account {
 		return balance;
 	}
 	public void deposit(double amount){
-		AccountEntry entry = new AccountEntry(new Date(), amount, "deposit", "", "");
+		//AccountEntry entry = new AccountEntry(new Date(), amount, "deposit", "", "");
+                AccountEntry entry = new AccountEntry.Builder()
+                        .withDate(new Date())
+                        .withAmount(amount)
+                        .withDescription("deposit")
+                        .build();
 		entryList.add(entry);
 	}
 	public void withdraw(double amount){
-		AccountEntry entry = new AccountEntry(new Date(), -amount, "withdraw", "", "");
-		entryList.add(entry);	
+		//AccountEntry entry = new AccountEntry(new Date(), -amount, "withdraw", "", "");
+		AccountEntry entry = new AccountEntry.Builder()
+                        .withDate(new Date())
+                        .withAmount(-amount)
+                        .withDescription("withdraw")
+                        .build();
+                entryList.add(entry);	
 	}
 
 	private void addEntry(AccountEntry entry){
@@ -39,9 +49,24 @@ public class Account {
 	}
 
 	public void transferFunds(Account toAccount, double amount, String description){
-		AccountEntry fromEntry = new AccountEntry(new Date(), -amount, description, ""+toAccount.getAccountnumber(), toAccount.getCustomer().getName());
-		AccountEntry toEntry = new AccountEntry(new Date(), amount, description, ""+toAccount.getAccountnumber(), toAccount.getCustomer().getName());
-		entryList.add(fromEntry);	
+		
+                AccountEntry fromEntry = new AccountEntry.Builder()
+                        .withDate(new Date())
+                        .withAmount(-amount)
+                        .withDescription(description)
+                        .withFromAccountNumber(""+toAccount.getAccountnumber())
+                        .withFromPersonName(toAccount.getCustomer().getName())
+                        .build();
+                
+                AccountEntry toEntry = new AccountEntry.Builder()
+                        .withDate(new Date())
+                        .withAmount(amount)
+                        .withDescription(description)
+                        .withFromAccountNumber(""+toAccount.getAccountnumber())
+                        .withFromPersonName(toAccount.getCustomer().getName())
+                        .build();
+ 
+                entryList.add(fromEntry);	
 		toAccount.addEntry(toEntry);
 
 	}
@@ -57,3 +82,4 @@ public class Account {
 	}
 
 }
+

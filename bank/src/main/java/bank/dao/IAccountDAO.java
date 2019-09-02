@@ -9,3 +9,4 @@ public interface IAccountDAO {
 	Account loadAccount(long accountnumber);
 	Collection<Account> getAccounts();
 }
+
