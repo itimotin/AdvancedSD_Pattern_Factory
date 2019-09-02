@@ -26,7 +26,6 @@ public class Account {
 		return balance;
 	}
 	public void deposit(double amount){
-		//AccountEntry entry = new AccountEntry(new Date(), amount, "deposit", "", "");
                 AccountEntry entry = new AccountEntry.Builder()
                         .withDate(new Date())
                         .withAmount(amount)

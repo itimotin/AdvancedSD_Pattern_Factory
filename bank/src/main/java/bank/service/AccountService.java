@@ -6,14 +6,16 @@ import bank.dao.AccountDAO;
 import bank.dao.IAccountDAO;
 import bank.domain.Account;
 import bank.domain.Customer;
+import bank.pattern.Transaction;
+import java.util.Collection;
 
 
 public class AccountService implements IAccountService {
-	private IAccountDAO accountDAO;
+	private Transaction accountDAO;
 
 	
 	public AccountService(){
-		accountDAO=new AccountDAO();
+		accountDAO=new Transaction();
 	}
 
 	public Account createAccount(long accountNumber, String customerName) {
